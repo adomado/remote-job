@@ -1,1 +1,1 @@
-* Expects ./test-data.txt to provide a data file (list of urls, 1 per line)
+Look inside $proj/javascripts/workee/remote_mapreduce_worker.js
