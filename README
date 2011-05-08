@@ -1,1 +1,1 @@
-#!foo
+* Expects ./test-data.txt to provide a data file (list of urls, 1 per line)
