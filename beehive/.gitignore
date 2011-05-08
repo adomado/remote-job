@@ -1,0 +1,5 @@
+.bundle
+log/*.log
+tmp/
+public/javascripts/workee/raw_hits.csv
+.redcar

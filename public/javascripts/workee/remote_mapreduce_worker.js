@@ -23,25 +23,31 @@ var RemoteJob = {
   },
   
   
-  startProcessing : function(data) {
+  startMapReduce : function(allData) {
     var allSteps = [];
-    for(var i=0; i<data.length; i++)
+    var allIds = [];
+    for(var i=0; i<allData.length; i++)
     {
-      var step = RemoteJob.map(data[i]);
+      var url = allData[i].stage_one.data;
+      allIds.push(allData[i].stage_one.id);
+      var step = RemoteJob.map(url);
       if(step)
         allSteps = allSteps.concat(step);
     }
       
     var result = RemoteJob.reduce(allSteps);
-    return result;
+    return {computedResult : result, dataIds : allIds};
   },
   
   
   init : function(successCallback) {
-    $.get("/workee/test-data.txt", function(data) {
-      if(data)
+    $.get("/stage/one_data", function(allData) {
+      if(allData)
       {
-        result = RemoteJob.startProcessing(data.split("\n"));
+        result = RemoteJob.startMapReduce(allData);
+        $.get("/stage/one_result", {data : JSON.stringify(result.computedResult), ids : JSON.stringify(result.dataIds)}, function(data) {
+          console.log(data);
+        });
         successCallback(result);
       }
     }); 

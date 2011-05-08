@@ -18,6 +18,7 @@
           $("#time-taken").html((timeLapsed/1000) + " Seconds");
           
           $("#result").html(JSON.stringify(calculatedData));
+          setTimeout("document.location.reload()", 3000);
         });
         
       })
