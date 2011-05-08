@@ -1,0 +1,41 @@
+<html>
+
+  <head>
+    <script type="text/javascript" src="jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="remote_mapreduce_worker.js"></script>
+  </head>
+
+  <body>
+    <div id="prime"></div>
+    <div id="time-taken"></div><br/>
+    <div id="result" style="width:80%; text-align:center;"></div>
+    
+    <script>
+      /*var worker = new Worker("workee.js");
+      
+      worker.addEventListener('message', function(e) {
+        var message = e.data;
+        if(message.action == "log")
+          console.log(message.data);
+        if(message.action == "primeFound")
+          document.getElementById("prime").innerHTML = message.data;
+      }, false);
+
+      worker.postMessage('start'); // Send data to our worker.    */  
+    </script>
+    
+    <script>
+      $(function() {
+        var startTime = new Date;
+        var result = RemoteJob.init(function(calculatedData) {
+          var endTime = new Date;
+          var timeLapsed = endTime - startTime;
+          $("#time-taken").html((timeLapsed/1000) + " Seconds")
+          $("#result").html(JSON.stringify(calculatedData));
+        });
+        
+      })
+    </script>
+    
+  </body>
+</html>
